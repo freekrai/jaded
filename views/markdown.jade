@@ -1,0 +1,15 @@
+extends layout
+
+block content
+	section.row
+		div.col-sm-8
+			#markdown!= pageContent
+		div.col-sm-3.col-sm-offset-1.well
+			span#title 
+				a(href='/') Jaded
+			nav#links
+				ul.list-unstyled
+					li
+						a(href='/about') About
+					li
+						a(href='/hello') Hello
