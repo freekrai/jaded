@@ -43,9 +43,9 @@ jadedSite.prototype.start = function(){
 };
 
 var mostPopular = function(){
-	this.api_key = "74c8064f-cd6f-4c07-8baf-b1d241496eec";
-	this.db = "rogerstringer";
-	this.collection = "mostpopular";
+	this.api_key = "";
+	this.db = "";
+	this.collection = "";
 
 	this.pages = [];
 
