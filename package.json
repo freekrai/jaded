@@ -1,26 +1,26 @@
 {
-  "name": "kevin.mn",
+  "name": "Jaded",
   "version": "1.0.0",
-  "description": "Kevin Whinnery's public blog and website",
+  "description": "Jade powered node.js website",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/kwhinnery/kevin.mn"
+    "url": "https://github.com/freekrai/jaded"
   },
   "keywords": [
     "personal",
     "site",
     "blog"
   ],
-  "author": "Kevin Whinnery",
+  "author": "Roger Stringer",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/kwhinnery/kevin.mn/issues"
+    "url": "https://github.com/freekrai/jaded/issues"
   },
-  "homepage": "https://github.com/kwhinnery/kevin.mn",
+  "homepage": "https://github.com/freekrai/jaded",
   "dependencies": {
     "cheerio": "^0.18.0",
     "express": "^4.11.0",
