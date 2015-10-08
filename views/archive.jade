@@ -1,0 +1,17 @@
+extends layout
+
+block content
+	section.row
+		div.col-sm-8
+			h1 Archives Page
+			ul
+				for post in posts
+					li
+						a( href="#{post.url}") #{post.title}
+
+		div.col-sm-3.col-sm-offset-1.well
+			ul.list-unstyled
+				li
+					a(href='/') Home
+				li
+					a(href='/archive') Archive

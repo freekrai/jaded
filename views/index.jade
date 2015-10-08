@@ -9,5 +9,15 @@ block content
 			Jaded
 		p.
 			Jaded is a Bare bones jade-based web site, meant for quick websites.
+
+		div.well
+			ul.list-unstyled
+				li
+					strong Featured Post: 
+					a(href='#{latest.url}') #{latest.title}
+				li
+					a(href='/archive') Archive
+				li
+					a(href='/about') About
 block scripts
 	script(src='/js/index.js')

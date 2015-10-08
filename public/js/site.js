@@ -49,7 +49,7 @@ var mostPopular = function(){
 
 	this.pages = [];
 
-	this.datamcflyRef = new DataMcFly( this.api_key, this.db, this.collection );
+	this.flybaseRef = new Flybase( this.api_key, this.db, this.collection );
 	this.populate();
 	return this;
 };
@@ -58,7 +58,7 @@ mostPopular.prototype.populate = function(){
 	var _this = this;
 
 	//	let's get a list of pages for use later...
-	this.datamcflyRef.orderBy( {"views":-1} ).on('value', function( data ){
+	this.flybaseRef.orderBy( {"views":-1} ).on('value', function( data ){
 		if( data.count() ){
 			data.forEach( function(snapshot) {
 				var item = snapshot.value();
@@ -77,7 +77,7 @@ mostPopular.prototype.getPages = function( div_id ){
 	};
 //	this.pages.slice(1, 6);
 	$('<aside id="popular"><header><h1>'+r.headline+"</h1></header></aside>").prependTo( div_id );
-	this.datamcflyRef.orderBy({"views":-1}).limit(6).on('value',function( data ){
+	this.flybaseRef.orderBy({"views":-1}).limit(6).on('value',function( data ){
 		if( data.count() ){
 			var pages = [];
 			data.forEach( function(snapshot) {
@@ -115,45 +115,18 @@ mostPopular.prototype.updatePage = function( url, title ){
 	//	get current count and increment it...
 	var cnt = 0;
 	var _this = this;
-/*
-	if ( this.pages[ key ] !== null ) {
-		var item = this.pages[ key ];
-
-		item.views = item.views + 1;
-
-		this.pages[ key ] = item;
-
-		this.datamcflyRef.update(item._id, item, function(resp) {
-			console.log( key + " updated" );
-		});
-	}else{
-		// no count, so never added before..
-		var item = {
-			"key":key,
-			"url":url,
-			"title":title,
-			"views":1	
-		};
-		
-		this.pages[ key ] = item;
-
-		this.datamcflyRef.push(item, function(resp) {
-			console.log( key + " added" );
-		});
-	}
-*/
-	this.datamcflyRef.where({ "key": key }).on('value',function( data ){
+	this.flybaseRef.where({ "key": key }).once('value',function( data ){
 		if( data.count() ){
 			data.forEach( function(snapshot) {
 				var item = snapshot.value();
 				item.views = item.views + 1;
-				_this.datamcflyRef.update(item._id,item, function(resp) {
+				_this.flybaseRef.update(item._id,item, function(resp) {
 					console.log( key + " updated" );
 				});
 			});
 		}else{
 			// no count, so never added before..
-			_this.datamcflyRef.push({
+			_this.flybaseRef.push({
 				"key":key,
 				"url":url,
 				"title":title,
