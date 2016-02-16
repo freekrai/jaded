@@ -49,17 +49,22 @@ app.get('/archive', function(request, response){
 // catch-all handler for simple markdown posts
 app.get('/:page', function(request, response, next) {
 	var pageRequested = request.params.page;
-	var content = pages[pageRequested] || markdown(request.params.page);
-	if (!content) {
-		return next();
-	} else if (!pages[pageRequested]) {
-		pages[pageRequested] = content;
+	var template = path.join(__dirname, 'markdown');
+	if( fs.existsSync(template + '/'+pageRequested+'.md') ){
+		var content = pages[pageRequested] || markdown(request.params.page);
+		if (!content) {
+			return next();
+		} else if (!pages[pageRequested]) {
+			pages[pageRequested] = content;
+		}
+	
+		response.render('markdown', {
+			title: content.title,
+			pageContent: content.html
+		});
+	}else{
+		response.status(404).sendFile(path.join(__dirname, 'public', '404.html'));
 	}
-
-	response.render('markdown', {
-		title: content.title,
-		pageContent: content.html
-	});
 });
 
 // 404
